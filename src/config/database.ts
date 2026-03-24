@@ -88,3 +88,4 @@ export const testConnection = async (): Promise<void> => {
 };
 testConnection();
 export default pool;
+//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
