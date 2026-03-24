@@ -10,10 +10,10 @@ const router = Router();
 router.post('/register', async (req, res) => {
   const { businessName, email, password, phone, name } = req.body;
   try {
-    logger.info("REG STARTED")
+    logger.info("REG STARTED 1")
     const existing = await query('SELECT id FROM users WHERE email = $1', [email]);
     if (existing.rows.length) return res.status(409).json({ error: 'Email already registered' });
-
+    logger.info("REG STARTED 2")
     const hash = await bcrypt.hash(password, 12);
     const bizResult = await query(
       'INSERT INTO businesses (name, email, phone) VALUES ($1, $2, $3) RETURNING id',
@@ -41,6 +41,7 @@ router.post('/register', async (req, res) => {
     res.status(201).json({ token, user: userResult.rows[0], businessId });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
+    logger.error(err.message);
   }
 });
 
