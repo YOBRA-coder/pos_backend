@@ -288,7 +288,4 @@ export async function migrate() {
   }
 }
 
-migrate().catch((err) => {
-  logger.error(err);
-  process.exit(1);
-});
+

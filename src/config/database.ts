@@ -81,6 +81,10 @@ export const testConnection = async (): Promise<void> => {
   try {
     const result = await pool.query('SELECT NOW()');
     logger.info(`Database connected: ${result.rows[0].now}`);
+    migrate().catch((err) => {
+      logger.error(err);
+      process.exit(1);
+    });
 
   } catch (error) {
     logger.error('Database connection failed:', error);
@@ -88,6 +92,6 @@ export const testConnection = async (): Promise<void> => {
   }
 };
 testConnection();
-migrate();
+
 export default pool;
 //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
