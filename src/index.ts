@@ -19,7 +19,7 @@ const API_VERSION = process.env.API_VERSION || 'v1';
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 
 // ===== CORS =====
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'https://pos-frontend-jwu1.vercel.app,https://pos-frontend-bx9b.vercel.app').split(',');
+const allowedOrigins = ('https://pos-frontend-jwu1.vercel.app,https://pos-frontend-bx9b.vercel.app').split(',');
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -32,6 +32,8 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+app.set("trust proxy", 1);
 
 // ===== RATE LIMITING =====
 const limiter = rateLimit({
