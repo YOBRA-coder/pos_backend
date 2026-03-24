@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 const API_VERSION = process.env.API_VERSION || 'v1';
-
+app.set("trust proxy", 1);
 // ===== SECURITY MIDDLEWARE =====
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 
@@ -33,7 +33,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.set("trust proxy", 1);
+app.set("trust proxy", true);
 
 // ===== RATE LIMITING =====
 const limiter = rateLimit({
