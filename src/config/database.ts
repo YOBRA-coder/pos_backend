@@ -2,6 +2,7 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import { logger } from '../utils/logger';
 
+
 dotenv.config();
 /*
 const poolConfig: PoolConfig = {
@@ -79,6 +80,7 @@ export const testConnection = async (): Promise<void> => {
   try {
     const result = await pool.query('SELECT NOW()');
     logger.info(`Database connected: ${result.rows[0].now}`);
+
   } catch (error) {
     logger.error('Database connection failed:', error);
     throw error;
