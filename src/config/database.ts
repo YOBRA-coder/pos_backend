@@ -1,9 +1,9 @@
-import { Pool, PoolConfig } from 'pg';
+import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import { logger } from '../utils/logger';
 
 dotenv.config();
-
+/*
 const poolConfig: PoolConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
@@ -16,9 +16,11 @@ const poolConfig: PoolConfig = {
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
   statement_timeout: 30000,
-};
+};*/
 
-export const pool = new Pool(poolConfig);
+export const pool = new Pool({
+  connectionString:process.env.DATABASE_URL
+});
 
 pool.on('connect', () => {
   console.log("db connected")
