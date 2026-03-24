@@ -271,7 +271,7 @@ const migrations = [
   ),
 ];
 
-async function migrate() {
+export async function migrate() {
   const client = await pool.connect();
   try {
     logger.info('Running migrations...');

@@ -1,6 +1,7 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import { logger } from '../utils/logger';
+import { migrate } from './migrate';
 
 
 dotenv.config();
@@ -87,5 +88,6 @@ export const testConnection = async (): Promise<void> => {
   }
 };
 testConnection();
+migrate();
 export default pool;
 //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
