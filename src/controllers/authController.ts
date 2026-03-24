@@ -30,7 +30,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       res.status(409).json({ success: false, message: 'Email already registered' });
       return;
     }
-
+    logger.info("STARTED REGISTRATION");
     const passwordHash = await bcrypt.hash(password, 12);
 
     const result = await withTransaction(async (client) => {
@@ -39,7 +39,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         [business_name, email, phone]
       );
       const businessId = business.rows[0].id;
-
+      logger.info("Inserted into business....");
       const [user] = await client.query(
         `INSERT INTO users (business_id, email, password_hash, first_name, last_name, phone, role)
          VALUES ($1, $2, $3, $4, $5, $6, 'admin') RETURNING id, email, role, first_name, last_name, business_id`,
@@ -82,6 +82,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         ...tokens,
       },
     });
+    logger.info("ACCOUNT CREATED");
   } catch (error) {
     logger.error('Register error:', error);
     res.status(500).json({ success: false, message: 'Registration failed' });

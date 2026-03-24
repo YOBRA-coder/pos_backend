@@ -20,7 +20,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-app.set("trust proxy", 1);
+app.set("trust proxy", 1)
+console.log("TRUST PROXY:", app.get("trust proxy"));;
 // Security & Performance
 app.use(helmet());
 app.use(compression());

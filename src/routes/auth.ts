@@ -3,12 +3,14 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { query } from '../utils/database';
 import { authenticate, AuthRequest } from '../middleware/auth';
+import { logger } from '../utils/logger';
 
 const router = Router();
 
 router.post('/register', async (req, res) => {
   const { businessName, email, password, phone, name } = req.body;
   try {
+    logger.info("REG STARTED")
     const existing = await query('SELECT id FROM users WHERE email = $1', [email]);
     if (existing.rows.length) return res.status(409).json({ error: 'Email already registered' });
 
@@ -17,6 +19,7 @@ router.post('/register', async (req, res) => {
       'INSERT INTO businesses (name, email, phone) VALUES ($1, $2, $3) RETURNING id',
       [businessName, email, phone]
     );
+    logger.info("REG BUSINESS INSERT STARTED")
     const businessId = bizResult.rows[0].id;
 
     const userResult = await query(
