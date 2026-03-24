@@ -19,7 +19,7 @@ const API_VERSION = process.env.API_VERSION || 'v1';
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 
 // ===== CORS =====
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3001,http://localhost:5173').split(',');
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'https://pos-frontend-jwu1.vercel.app,https://pos-frontend-bx9b.vercel.app').split(',');
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
