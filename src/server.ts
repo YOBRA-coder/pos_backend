@@ -19,7 +19,7 @@ import usersRoutes from './routes/users';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 1000;
 app.set("trust proxy", 1)
 console.log("TRUST PROXY:", app.get("trust proxy"));;
 // Security & Performance
