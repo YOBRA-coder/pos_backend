@@ -19,7 +19,7 @@ app.set("trust proxy", 1);
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 
 // ===== CORS =====
-const allowedOrigins = ('https://pos-frontend-jwu1.vercel.app,https://pos-frontend-bx9b.vercel.app').split(',');
+const allowedOrigins = ('http://localhost:3000,https://pos-frontend-bx9b.vercel.app').split(',');
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
