@@ -10,7 +10,7 @@ const router = Router();
 router.post('/register', async (req, res) => {
   const { businessName, email, password, phone, name } = req.body;
   try {
-    logger.info("REG STARTED 1")
+    logger.info("REG STARTED 1"+businessName,email,name)
     const existing = await query('SELECT id FROM users WHERE email = $1', [email]);
     if (existing.rows.length) return res.status(409).json({ error: 'Email already registered' });
     logger.info("REG STARTED 2")
