@@ -19,7 +19,7 @@ import usersRoutes from './routes/users';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 1000;
+const PORT = process.env.PORT || 10000;
 app.set("trust proxy", 1)
 console.log("TRUST PROXY:", app.get("trust proxy"));;
 // Security & Performance
@@ -63,7 +63,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   res.status(500).json({ error: 'Internal server error', message: err.message });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   logger.info(`🚀 POS Server running on port ${PORT}`);
 });
 
