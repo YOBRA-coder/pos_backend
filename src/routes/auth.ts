@@ -40,8 +40,9 @@ router.post('/register', async (req, res) => {
     );
     res.status(201).json({ token, user: userResult.rows[0], businessId });
   } catch (err: any) {
+logger.error(err.message)
     res.status(500).json({ error: err.message });
-    logger.error(err.message);
+    ;
   }
 });
 
