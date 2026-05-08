@@ -92,6 +92,6 @@ export const testConnection = async (): Promise<void> => {
     throw error;
   }
 };
-testConnection();
+//testConnection();
 
 export default pool;
